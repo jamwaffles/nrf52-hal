@@ -347,6 +347,17 @@ where
     }
 }
 
+impl<T> embedded_hal::blocking::i2c::Write for Twim<T>
+where
+    T: TwimExt,
+{
+    type Error = Error;
+
+    fn write<'w>(&mut self, addr: u8, words: &'w [u8]) -> Result<(), Error> {
+        self.write(addr, words)
+    }
+}
+
 /// The pins used by the TWIN peripheral
 ///
 /// Currently, only P0 pins are supported.
